@@ -24,17 +24,21 @@ let feedback = [
 $: count = feedback.length
 $: average = feedback.reduce((a, {rating}) => a + rating, 0) / count
 
+const addFeedback = (e) => {
+    const newFeedback = e.detail
+    feedback = [newFeedback, ...feedback]
+}
+
 const deleteFeedback = (e) => {
     const itemId = e.detail
     feedback = feedback.filter((item) => item.id != itemId)
 }
 
 </script>
-
 <main class=container>
-    <FeedbackForm />
+    <FeedbackForm on:add-feedback={addFeedback}/>
     <FeedbackStats {count} {average} />
-    <FeedbackList {feedback} on:delete-feedback={deleteFeedback} />
+    <FeedbackList {feedback} on:delete-feedback={deleteFeedback}/>
 </main>
 
 <style>
