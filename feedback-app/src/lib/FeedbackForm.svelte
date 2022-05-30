@@ -6,6 +6,7 @@
     import RatingSelect from './RatingSelect.svelte'
 
     let text = '';
+    let waiter = '';
     let rating = 10
     let btnDisabled = true;
     let min = 10
@@ -28,12 +29,13 @@
                 const newFeedback = {
                     id: uuidv4(),
                     text,
-                    rating: +rating
+                    rating: +rating,
+                    waiter
                 }
                 FeedbackStore.update((currentFeedback) => {
                     return [newFeedback, ...currentFeedback]
                 })
-
+                waiter = ''
                 text = ''
             }
         }
@@ -46,6 +48,10 @@
 
     <form on:submit|preventDefault={handleSubmit}>
         <RatingSelect on:rating-select={handleSelect}/>
+        <div class="input-group">
+            <input type="text" on:input={handleInput} bind:value = {waiter}
+            placeholder="Who were you served by?">
+        </div>
         <div class="input-group">
             <input type="text" on:input={handleInput} bind:value = {text}
             placeholder="Tell us something that keeps you coming back">

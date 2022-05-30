@@ -19,6 +19,9 @@
     <p class="text-display">
         {item.text}
     </p>
+    <p class="waiter-display">
+       Served by: {item.waiter}
+    </p>
 </Card>
 
 <style>
@@ -43,5 +46,11 @@
         right: 20px;
         border: none;
         background: none;
+    }
+
+    .waiter-display {
+        font-size: 12px;
+        position: absolute;
+        top: 8px;
     }
 </style>
